@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 public class Gemstone {
-    private Map<StoneName, Gemstone> nameTypeMap;
+    private Map<StoneName, GemstoneType> nameTypeMap;
     private BigDecimal carat;
     private BigDecimal caratPrice;
     private Transparency transparency;
 
-    public Map<StoneName, Gemstone> getNameTypeMap() {
+    public Map<StoneName, GemstoneType> getNameTypeMap() {
         return nameTypeMap;
     }
 
@@ -25,7 +25,7 @@ public class Gemstone {
         return transparency;
     }
 
-    private Gemstone(Map<StoneName, Gemstone> nameTypeMap, BigDecimal carat, BigDecimal caratPrice, Transparency transparency) {
+    private Gemstone(Map<StoneName, GemstoneType> nameTypeMap, BigDecimal carat, BigDecimal caratPrice, Transparency transparency) {
         this.nameTypeMap = nameTypeMap;
         this.carat = carat;
         this.caratPrice = caratPrice;
@@ -33,12 +33,12 @@ public class Gemstone {
     }
 
     public static class GemstoneBuilder {
-        private Map<StoneName, Gemstone> nameTypeMap;
+        private Map<StoneName, GemstoneType> nameTypeMap;
         private BigDecimal carat;
         private BigDecimal caratPrice;
         private Transparency transparency;
 
-        public GemstoneBuilder setNameTypeMap(Map<StoneName, Gemstone> nameTypeMap) {
+        public GemstoneBuilder setNameTypeMap(Map<StoneName, GemstoneType> nameTypeMap) {
             this.nameTypeMap = nameTypeMap;
             return this;
         }
@@ -61,5 +61,15 @@ public class Gemstone {
         public Gemstone build() {
             return new Gemstone(nameTypeMap, carat, caratPrice, transparency);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Gemstone{" +
+                "nameTypeMap=" + nameTypeMap +
+                ", carat=" + carat +
+                ", caratPrice=" + caratPrice +
+                ", transparency=" + transparency +
+                '}';
     }
 }
