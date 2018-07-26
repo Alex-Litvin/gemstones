@@ -169,7 +169,7 @@ public class Main {
                 .build());
         Necklace necklace = new Necklace(gemstones);
 
-        BigDecimal cost = costCalculator.calculateCostNecklace(necklace);
+        BigDecimal cost = costCalculator.calcCostNecklace(necklace);
         BigDecimal weight = weightCalculator.calculateWeight(necklace);
         System.out.println(cost);
         System.out.println(weight);

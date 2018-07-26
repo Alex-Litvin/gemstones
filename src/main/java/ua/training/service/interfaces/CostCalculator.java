@@ -5,6 +5,6 @@ import ua.training.model.Necklace;
 import java.math.BigDecimal;
 
 public interface CostCalculator {
-    BigDecimal calculateCostNecklace(Necklace necklace);
-    BigDecimal calculateCostOneGemstone(BigDecimal carat, BigDecimal price);
+    BigDecimal calcCostNecklace(Necklace necklace);
+    BigDecimal calcCostOneGemstone(BigDecimal carat, BigDecimal price, BigDecimal costFactor);
 }
