@@ -24,4 +24,8 @@ public class DBNameTypeGemstoneMock {
         NAME_TYPE_GEMSTONE.put(TOURMALINE, PRECIOUS);
         NAME_TYPE_GEMSTONE.put(SPINEL, PRECIOUS);
     }
+
+    public static Map<StoneName, GemstoneType> getNameTypeGemstone() {
+        return NAME_TYPE_GEMSTONE;
+    }
 }

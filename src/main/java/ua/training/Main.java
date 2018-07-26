@@ -16,14 +16,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ua.training.model.GemstoneType.PRECIOUS;
-import static ua.training.model.GemstoneType.SEMIPRECIOUS;
+import static ua.training.dao.DBNameTypeGemstoneMock.getNameTypeGemstone;
 import static ua.training.model.StoneName.*;
 import static ua.training.model.Transparency.*;
 
 public class Main {
     public static void main(String[] args) {
         testCostAndWeightCalculatorServices();
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         testSearcherService();
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         testSorterService();
@@ -35,13 +35,13 @@ public class Main {
         List<Gemstone> gemstones = new ArrayList<>();
 
         Map<StoneName, GemstoneType> map1 = new HashMap<>();
-        map1.put(DIAMOND, PRECIOUS);
+        map1.put(DIAMOND, getNameTypeGemstone().get(DIAMOND));
         Map<StoneName, GemstoneType> map2 = new HashMap<>();
-        map2.put(RUBY, PRECIOUS);
+        map2.put(RUBY, getNameTypeGemstone().get(RUBY));
         Map<StoneName, GemstoneType> map3 = new HashMap<>();
-        map3.put(TOPAZ, SEMIPRECIOUS);
+        map3.put(TOPAZ, getNameTypeGemstone().get(TOPAZ));
         Map<StoneName, GemstoneType> map4 = new HashMap<>();
-        map4.put(TOURMALINE, SEMIPRECIOUS);
+        map4.put(TOURMALINE, getNameTypeGemstone().get(TOURMALINE));
 
         gemstones.add(new Gemstone.GemstoneBuilder()
                 .setNameTypeMap(map1)
@@ -82,13 +82,13 @@ public class Main {
         List<Gemstone> gemstones = new ArrayList<>();
 
         Map<StoneName, GemstoneType> map1 = new HashMap<>();
-        map1.put(DIAMOND, PRECIOUS);
+        map1.put(DIAMOND, getNameTypeGemstone().get(DIAMOND));
         Map<StoneName, GemstoneType> map2 = new HashMap<>();
-        map2.put(RUBY, PRECIOUS);
+        map2.put(RUBY, getNameTypeGemstone().get(RUBY));
         Map<StoneName, GemstoneType> map3 = new HashMap<>();
-        map3.put(TOPAZ, SEMIPRECIOUS);
+        map3.put(TOPAZ, getNameTypeGemstone().get(TOPAZ));
         Map<StoneName, GemstoneType> map4 = new HashMap<>();
-        map4.put(TOURMALINE, SEMIPRECIOUS);
+        map4.put(TOURMALINE, getNameTypeGemstone().get(TOURMALINE));
 
         gemstones.add(new Gemstone.GemstoneBuilder()
                 .setNameTypeMap(map1)
@@ -121,7 +121,7 @@ public class Main {
 
         Necklace necklace1 = new Necklace(gemstones);
 
-        List<Gemstone> gemstones1 = searcher.findGemstonesByTransparency(necklace1, TRANSPARENT);
+        List<Gemstone> gemstones1 = searcher.findGemstonesByTransparency(necklace1, TRANSPARENT, NON_TRANSPARENT);
         gemstones1.stream().map(gemstone -> gemstone.toString()).forEach(System.out::println);
     }
 
@@ -131,13 +131,13 @@ public class Main {
         List<Gemstone> gemstones = new ArrayList<>();
 
         Map<StoneName, GemstoneType> map1 = new HashMap<>();
-        map1.put(DIAMOND, PRECIOUS);
+        map1.put(DIAMOND, getNameTypeGemstone().get(DIAMOND));
         Map<StoneName, GemstoneType> map2 = new HashMap<>();
-        map2.put(RUBY, PRECIOUS);
+        map2.put(RUBY, getNameTypeGemstone().get(RUBY));
         Map<StoneName, GemstoneType> map3 = new HashMap<>();
-        map3.put(TOPAZ, SEMIPRECIOUS);
+        map3.put(TOPAZ, getNameTypeGemstone().get(TOPAZ));
         Map<StoneName, GemstoneType> map4 = new HashMap<>();
-        map4.put(TOURMALINE, SEMIPRECIOUS);
+        map4.put(TOURMALINE, getNameTypeGemstone().get(TOURMALINE));
 
         gemstones.add(new Gemstone.GemstoneBuilder()
                 .setNameTypeMap(map1)
