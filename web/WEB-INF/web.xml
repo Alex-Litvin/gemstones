@@ -3,4 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <display-name>Gemstone</display-name>
+    <welcome-file-list>
+        <welcome-file>/necklace.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>NecklaceServlet</servlet-name>
+        <servlet-class>ua.training.servlet.NecklaceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NecklaceServlet</servlet-name>
+        <url-pattern>/necklace</url-pattern>
+    </servlet-mapping>
 </web-app>
