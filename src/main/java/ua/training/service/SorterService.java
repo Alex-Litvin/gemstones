@@ -14,7 +14,7 @@ public class SorterService implements Sorter {
 
     @Override
     public void sortGemstoneByCost(Necklace necklace) {
-        necklace.getNecklace().stream()
+        necklace.getGemstones().stream()
                 .sorted(new CostComparator(calculator))
                 .forEach(System.out::println);
     }

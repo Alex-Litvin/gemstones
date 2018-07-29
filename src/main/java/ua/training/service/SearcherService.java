@@ -13,7 +13,7 @@ public class SearcherService implements Searcher {
     @Override
     public List<Gemstone> findGemstonesByTransparency(Necklace necklace, Transparency...transparencies) {
         int count = transparencies.length;
-        Stream<Gemstone> gemstones = necklace.getNecklace().stream();
+        Stream<Gemstone> gemstones = necklace.getGemstones().stream();
         List<Gemstone> gemstoneList = null;
         switch (count) {
             case 1:

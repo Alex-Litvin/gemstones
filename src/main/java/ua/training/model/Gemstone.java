@@ -9,6 +9,17 @@ public class Gemstone {
     private BigDecimal caratPrice;
     private Transparency transparency;
 
+    public Gemstone() {
+
+    }
+
+    public Gemstone(Map<StoneName, GemstoneType> nameTypeMap, BigDecimal carat, BigDecimal caratPrice, Transparency transparency) {
+        this.nameTypeMap = nameTypeMap;
+        this.carat = carat;
+        this.caratPrice = caratPrice;
+        this.transparency = transparency;
+    }
+
     public Map<StoneName, GemstoneType> getNameTypeMap() {
         return nameTypeMap;
     }
@@ -25,10 +36,19 @@ public class Gemstone {
         return transparency;
     }
 
-    private Gemstone(Map<StoneName, GemstoneType> nameTypeMap, BigDecimal carat, BigDecimal caratPrice, Transparency transparency) {
+    public void setNameTypeMap(Map<StoneName, GemstoneType> nameTypeMap) {
         this.nameTypeMap = nameTypeMap;
+    }
+
+    public void setCarat(BigDecimal carat) {
         this.carat = carat;
+    }
+
+    public void setCaratPrice(BigDecimal caratPrice) {
         this.caratPrice = caratPrice;
+    }
+
+    public void setTransparency(Transparency transparency) {
         this.transparency = transparency;
     }
 

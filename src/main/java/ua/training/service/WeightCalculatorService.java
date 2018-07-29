@@ -10,7 +10,7 @@ public class WeightCalculatorService implements WeightCalculator {
 
     @Override
     public BigDecimal calculateWeight(Necklace necklace) {
-        return necklace.getNecklace().stream()
+        return necklace.getGemstones().stream()
                 .map(Gemstone::getCarat)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }

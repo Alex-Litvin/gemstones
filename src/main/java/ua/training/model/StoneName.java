@@ -1,21 +1,40 @@
 package ua.training.model;
 
+import java.math.BigDecimal;
+
 public enum StoneName {
-    AQUAMARINE("Aquamarine"),
-    GARNET("Garnet"),
-    SARDONYX("Sardonyx"),
-    TOPAZ("Topaz"),
-    CHRYSOLITE("Chrysolite"),
+    AQUAMARINE("Aquamarine", new BigDecimal("150")),
+    GARNET("Garnet", new BigDecimal("170")),
+    SARDONYX("Sardonyx", new BigDecimal("135")),
+    TOPAZ("Topaz", new BigDecimal("200")),
+    CHRYSOLITE("Chrysolite", new BigDecimal("120")),
 
-    DIAMOND("Diamond"),
-    EMERALD("Emerald"),
-    RUBY("Ruby"),
-    TOURMALINE("Tourmaline"),
-    SPINEL("Spinel");
+    DIAMOND("Diamond", new BigDecimal("800")),
+    EMERALD("Emerald", new BigDecimal("750")),
+    RUBY("Ruby", new BigDecimal("780")),
+    TOURMALINE("Tourmaline", new BigDecimal("670")),
+    SPINEL("Spinel", new BigDecimal("600"));
 
-    private String name;
+    private String title;
+    private BigDecimal caratPrice;
 
-    StoneName(String name) {
-        this.name = name;
+    StoneName(String title, BigDecimal caratPrice) {
+        this.title = title;
+        this.caratPrice = caratPrice;
+    }
+
+    public static StoneName fromString(String value) {
+        if (value != null) {
+            for (StoneName stoneName : StoneName.values()) {
+                if (value.equalsIgnoreCase(stoneName.title)) {
+                    return stoneName;
+                }
+            }
+        }
+        throw new IllegalArgumentException("No such element!");
+    }
+
+    public BigDecimal getCaratPrice() {
+        return caratPrice;
     }
 }

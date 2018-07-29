@@ -9,7 +9,7 @@ public class CostCalculatorService implements CostCalculator {
 
     @Override
     public BigDecimal calcCostNecklace(Necklace necklace) {
-        return necklace.getNecklace().stream()
+        return necklace.getGemstones().stream()
                 .map(g -> calcCostOneGemstone(g.getCarat(), g.getCaratPrice(), g.getTransparency().getCostFactor()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }

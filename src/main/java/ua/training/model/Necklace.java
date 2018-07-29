@@ -3,17 +3,19 @@ package ua.training.model;
 import java.util.List;
 
 public class Necklace {
-    private List<Gemstone> necklace;
+    private List<Gemstone> gemstones;
 
-    public Necklace(List<Gemstone> necklace) {
-        this.necklace = necklace;
+    public Necklace() {}
+
+    public Necklace(List<Gemstone> gemstones) {
+        this.gemstones = gemstones;
     }
 
-    public List<Gemstone> getNecklace() {
-        return necklace;
+    public List<Gemstone> getGemstones() {
+        return gemstones;
     }
 
-    public void setNecklace(List<Gemstone> necklace) {
-        this.necklace = necklace;
+    public void setGemstones(List<Gemstone> gemstones) {
+        this.gemstones = gemstones;
     }
 }
