@@ -1,21 +1,22 @@
 package ua.training.service;
 
-import ua.training.comparator.CostComparator;
+import ua.training.model.Gemstone;
 import ua.training.model.Necklace;
-import ua.training.service.interfaces.CostCalculator;
 import ua.training.service.interfaces.Sorter;
 
-public class SorterService implements Sorter {
-    private CostCalculator calculator;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
-    public SorterService(CostCalculator calculator) {
-        this.calculator = calculator;
-    }
+public class SorterService implements Sorter {
 
     @Override
-    public void sortGemstoneByCost(Necklace necklace) {
-        necklace.getGemstones().stream()
-                .sorted(new CostComparator(calculator))
-                .forEach(System.out::println);
+    public List<Gemstone> sortedGemstoneByCost(Necklace necklace) {
+        return necklace.getGemstones().stream()
+                .sorted(Comparator.comparing(Gemstone::getTotalCost))
+                .collect(Collectors.toList());
     }
 }
+
+
+

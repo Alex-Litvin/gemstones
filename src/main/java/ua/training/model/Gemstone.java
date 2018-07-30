@@ -7,16 +7,18 @@ public class Gemstone {
     private Map<StoneName, GemstoneType> nameTypeMap;
     private BigDecimal carat;
     private BigDecimal caratPrice;
+    private BigDecimal totalCost;
     private Transparency transparency;
 
     public Gemstone() {
 
     }
 
-    public Gemstone(Map<StoneName, GemstoneType> nameTypeMap, BigDecimal carat, BigDecimal caratPrice, Transparency transparency) {
+    public Gemstone(Map<StoneName, GemstoneType> nameTypeMap, BigDecimal carat, BigDecimal caratPrice, BigDecimal totalCost, Transparency transparency) {
         this.nameTypeMap = nameTypeMap;
         this.carat = carat;
         this.caratPrice = caratPrice;
+        this.totalCost = totalCost;
         this.transparency = transparency;
     }
 
@@ -36,26 +38,15 @@ public class Gemstone {
         return transparency;
     }
 
-    public void setNameTypeMap(Map<StoneName, GemstoneType> nameTypeMap) {
-        this.nameTypeMap = nameTypeMap;
-    }
-
-    public void setCarat(BigDecimal carat) {
-        this.carat = carat;
-    }
-
-    public void setCaratPrice(BigDecimal caratPrice) {
-        this.caratPrice = caratPrice;
-    }
-
-    public void setTransparency(Transparency transparency) {
-        this.transparency = transparency;
+    public BigDecimal getTotalCost() {
+        return totalCost;
     }
 
     public static class GemstoneBuilder {
         private Map<StoneName, GemstoneType> nameTypeMap;
         private BigDecimal carat;
         private BigDecimal caratPrice;
+        private BigDecimal totalCost;
         private Transparency transparency;
 
         public GemstoneBuilder setNameTypeMap(Map<StoneName, GemstoneType> nameTypeMap) {
@@ -78,18 +69,19 @@ public class Gemstone {
             return this;
         }
 
+        public GemstoneBuilder setTotalCost(BigDecimal totalCost) {
+            this.totalCost = totalCost;
+            return this;
+        }
+
         public Gemstone build() {
-            return new Gemstone(nameTypeMap, carat, caratPrice, transparency);
+            return new Gemstone(nameTypeMap, carat, caratPrice, totalCost, transparency);
         }
     }
 
     @Override
     public String toString() {
-        return "Gemstone{" +
-                "nameTypeMap=" + nameTypeMap +
-                ", carat=" + carat +
-                ", caratPrice=" + caratPrice +
-                ", transparency=" + transparency +
-                '}';
+        return nameTypeMap + ", carat = " + carat + ", carat/price = " + caratPrice +
+                ", totalCost = " + totalCost + ", " + transparency;
     }
 }

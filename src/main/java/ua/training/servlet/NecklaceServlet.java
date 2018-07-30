@@ -1,7 +1,6 @@
 package ua.training.servlet;
 
 import ua.training.dao.DBNameTypeGemstoneMock;
-import ua.training.dao.DBNecklaceMock;
 import ua.training.model.Gemstone;
 import ua.training.model.GemstoneType;
 import ua.training.model.StoneName;
@@ -19,18 +18,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class NecklaceServlet extends HttpServlet {
     private NecklaceService necklaceService;
     private CostCalculator costCalculator;
-    private DBNecklaceMock dbNecklaceMock;
 
     @Override
     public void init() {
         necklaceService = new NecklaceServiceImpl();
         costCalculator = new CostCalculatorService();
-        dbNecklaceMock = DBNecklaceMock.getDbNecklace();
     }
 
     @Override
@@ -45,27 +43,23 @@ public class NecklaceServlet extends HttpServlet {
         String carat = req.getParameter("carat");
         String transparency = req.getParameter("transparency");
 
-//        System.out.println(stone +" "+carat +" "+ transparency);
-
-        Gemstone gemstone = new Gemstone();
-
         Map<StoneName, GemstoneType> nameTypeMap = new HashMap<>();
         nameTypeMap.put(StoneName.fromString(stone), DBNameTypeGemstoneMock.getNameTypeGemstone().get(StoneName.fromString(stone)));
 
-        gemstone.setNameTypeMap(nameTypeMap);
-        gemstone.setCarat(new BigDecimal(carat));
-        gemstone.setCaratPrice(StoneName.fromString(stone).getCaratPrice());
-        gemstone.setTransparency(Transparency.fromString(transparency));
+        Gemstone gemstone = new Gemstone.GemstoneBuilder()
+                .setNameTypeMap(nameTypeMap)
+                .setCarat(new BigDecimal(carat))
+                .setCaratPrice(StoneName.fromString(stone).getCaratPrice())
+                .setTotalCost(costCalculator.calcCostOneGemstone(new BigDecimal(carat), StoneName.fromString(stone).getCaratPrice(), Transparency.fromString(transparency).getCostFactor()))
+                .setTransparency(Transparency.fromString(transparency))
+                .build();
 
         if (req.getParameter("addGemstone") != null) {
             necklaceService.addGemstoneToNecklace(gemstone);
         }
         if (req.getParameter("createNecklace") != null) {
-            necklaceService.createNecklace();
-        }
-        if (req.getParameter("calculatePrice") != null) {
-            BigDecimal totalCost = costCalculator.calcCostNecklace(DBNecklaceMock.getDbNecklace().getNecklaces().get(0));
-            req.setAttribute("totalCost", totalCost);
+            List<Gemstone> userGemstone = necklaceService.createNecklace();
+            req.setAttribute("necklace", userGemstone);
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("necklace.jsp");

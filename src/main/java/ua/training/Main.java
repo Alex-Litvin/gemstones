@@ -31,7 +31,7 @@ public class Main {
 
     public static void testSorterService() {
         CostCalculator calculator = new CostCalculatorService();
-        SorterService sorter = new SorterService(calculator);
+        SorterService sorter = new SorterService();
         List<Gemstone> gemstones = new ArrayList<>();
 
         Map<StoneName, GemstoneType> map1 = new HashMap<>();
@@ -74,7 +74,7 @@ public class Main {
 
         Necklace necklace1 = new Necklace(gemstones);
 
-       sorter.sortGemstoneByCost(necklace1);
+       sorter.sortedGemstoneByCost(necklace1);
     }
 
     public static void testSearcherService() {

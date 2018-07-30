@@ -6,6 +6,7 @@ import ua.training.model.Necklace;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DBNecklaceMock {
     private static DBNecklaceMock dbNecklace = new DBNecklaceMock();
@@ -21,6 +22,14 @@ public class DBNecklaceMock {
 
     public static DBNecklaceMock getDbNecklace() {
         return dbNecklace;
+    }
+
+    public List<Gemstone> getNecklaceById(Integer id) {
+        return necklaces.stream()
+                .filter(necklace -> necklace.getId().equals(id))
+                .map(Necklace::getGemstones)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
     public void addNecklace(Necklace necklace) {

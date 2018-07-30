@@ -11,6 +11,7 @@ import java.util.List;
 public class NecklaceServiceImpl implements NecklaceService {
     private DBNecklaceMock dbNecklace;
     private List<Gemstone> userGemstones = new ArrayList<>();
+    private Integer necklaceId = 0;
 
     public NecklaceServiceImpl() {
         this.dbNecklace = DBNecklaceMock.getDbNecklace();
@@ -22,8 +23,12 @@ public class NecklaceServiceImpl implements NecklaceService {
     }
 
     @Override
-    public void createNecklace() {
-        dbNecklace.addNecklace(new Necklace(new ArrayList<>(userGemstones)));
+    public List<Gemstone> createNecklace() {
+        Necklace necklace = new Necklace(new ArrayList<>(userGemstones));
+        necklace.setId(++necklaceId);
+        dbNecklace.addNecklace(necklace);
         userGemstones.clear();
+
+        return dbNecklace.getNecklaceById(necklaceId);
     }
 }

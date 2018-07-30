@@ -17,12 +17,30 @@
         <url-pattern>/necklace</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>-->
-        <!--<servlet-name>CostCalculatorServlet</servlet-name>-->
-        <!--<servlet-class>ua.training.servlet.CostCalculatorServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>CostCalculatorServlet</servlet-name>-->
-        <!--<url-pattern>/costCalculator</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>CostCalculatorServlet</servlet-name>
+        <servlet-class>ua.training.servlet.CostCalculatorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CostCalculatorServlet</servlet-name>
+        <url-pattern>/costCalculator</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>WeightCalculatorServlet</servlet-name>
+        <servlet-class>ua.training.servlet.WeightCalculatorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WeightCalculatorServlet</servlet-name>
+        <url-pattern>/weightCalculator</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SorterServlet</servlet-name>
+        <servlet-class>ua.training.servlet.SorterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SorterServlet</servlet-name>
+        <url-pattern>/sorter</url-pattern>
+    </servlet-mapping>
 </web-app>

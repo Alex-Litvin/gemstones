@@ -1,4 +1,5 @@
-<%@ page import="java.math.BigDecimal" %>
+<%@ page import="ua.training.model.Gemstone" %>
+<%@ page import="java.util.List" %>
 <html>
 <head>
     <title>Necklace</title>
@@ -53,14 +54,35 @@
         <button type="submit" name="createNecklace" class="w3-btn w3-green w3-round-large w3-margin-bottom">Create
             necklace
         </button>
+    </form>
+
+    <form action="${pageContext.request.contextPath}/costCalculator" method="get">
         <button type="submit" name="calculatePrice" class="w3-btn w3-green w3-round-large w3-margin-bottom">Calculate
             total price
         </button>
     </form>
+
+    <form action="${pageContext.request.contextPath}/weightCalculator" method="get">
+        <button type="submit" name="calculateWeight" class="w3-btn w3-green w3-round-large w3-margin-bottom">Calculate
+            total weight
+        </button>
+    </form>
+
+    <form action="${pageContext.request.contextPath}/sorter" method="get">
+        <button type="submit" name="sort" class="w3-btn w3-green w3-round-large w3-margin-bottom">Sort by cost</button>
+    </form>
     <%
-        BigDecimal totalCost = (BigDecimal) request.getAttribute("totalCost");
-        if (totalCost!= null) {
-            out.println(totalCost);
+        List<Gemstone> gemstones = (List<Gemstone>) request.getAttribute("necklace");
+        if (gemstones != null && !gemstones.isEmpty()) {
+            out.println("<div class=\"w3-card-4\">" +
+                            "<p>Your necklace consist of: </<p>" +
+                        "</div>");
+            for (Gemstone gemstone : gemstones) {
+                out.println(
+                        "<ul>\n" +
+                            "<li> "+gemstone+" </li>\n" +
+                        "</ul>");
+            }
         }
     %>
 </div>
