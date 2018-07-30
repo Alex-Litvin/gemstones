@@ -23,17 +23,6 @@ public enum StoneName {
         this.caratPrice = caratPrice;
     }
 
-    public static StoneName fromString(String value) {
-        if (value != null) {
-            for (StoneName stoneName : StoneName.values()) {
-                if (value.equalsIgnoreCase(stoneName.title)) {
-                    return stoneName;
-                }
-            }
-        }
-        throw new IllegalArgumentException("No such element!");
-    }
-
     public BigDecimal getCaratPrice() {
         return caratPrice;
     }

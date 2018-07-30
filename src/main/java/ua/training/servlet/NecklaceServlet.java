@@ -39,19 +39,19 @@ public class NecklaceServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String stone = req.getParameter("stone");
-        String carat = req.getParameter("carat");
-        String transparency = req.getParameter("transparency");
+        StoneName name = StoneName.valueOf(req.getParameter("stone").toUpperCase());
+        BigDecimal carat = new BigDecimal(req.getParameter("carat"));
+        Transparency transparency = Transparency.valueOf(req.getParameter("transparency").toUpperCase());
 
         Map<StoneName, GemstoneType> nameTypeMap = new HashMap<>();
-        nameTypeMap.put(StoneName.fromString(stone), DBNameTypeGemstoneMock.getNameTypeGemstone().get(StoneName.fromString(stone)));
+        nameTypeMap.put(name, DBNameTypeGemstoneMock.getNameTypeGemstone().get(name));
 
         Gemstone gemstone = new Gemstone.GemstoneBuilder()
                 .setNameTypeMap(nameTypeMap)
-                .setCarat(new BigDecimal(carat))
-                .setCaratPrice(StoneName.fromString(stone).getCaratPrice())
-                .setTotalCost(costCalculator.calcCostOneGemstone(new BigDecimal(carat), StoneName.fromString(stone).getCaratPrice(), Transparency.fromString(transparency).getCostFactor()))
-                .setTransparency(Transparency.fromString(transparency))
+                .setCarat(carat)
+                .setCaratPrice(name.getCaratPrice())
+                .setTotalCost(costCalculator.calcCostOneGemstone(carat, name.getCaratPrice(), transparency.getCostFactor()))
+                .setTransparency(transparency)
                 .build();
 
         if (req.getParameter("addGemstone") != null) {

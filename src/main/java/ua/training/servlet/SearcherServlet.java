@@ -31,15 +31,15 @@ public class SearcherServlet extends HttpServlet {
 
         List<Transparency> transparencies = new ArrayList<>();
         if (transparent != null) {
-            Transparency first = Transparency.fromString(transparent);
+            Transparency first = Transparency.valueOf(transparent.toUpperCase());
             transparencies.add(first);
         }
         if (semitransparent != null) {
-            Transparency second = Transparency.fromString(semitransparent);
+            Transparency second = Transparency.valueOf(semitransparent.toUpperCase());
             transparencies.add(second);
         }
         if (nontransparent != null) {
-            Transparency third = Transparency.fromString(nontransparent);
+            Transparency third = Transparency.valueOf(nontransparent.toUpperCase());
             transparencies.add(third);
         }
 

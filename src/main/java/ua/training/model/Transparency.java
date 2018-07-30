@@ -16,15 +16,4 @@ public enum Transparency {
     public BigDecimal getCostFactor() {
         return costFactor;
     }
-
-    public static Transparency fromString(String value) {
-        if (value != null) {
-            for (Transparency transparency : Transparency.values()) {
-                if (value.equalsIgnoreCase(transparency.name())) {
-                    return transparency;
-                }
-            }
-        }
-        throw new IllegalArgumentException("No such element!");
-    }
 }
