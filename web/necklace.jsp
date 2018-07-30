@@ -55,7 +55,7 @@
             necklace
         </button>
     </form>
-
+    <span style="color: red; ">${message}</span>
     <%
         List<Gemstone> gemstones = (List<Gemstone>) request.getAttribute("necklace");
         if (gemstones != null && !gemstones.isEmpty()) {

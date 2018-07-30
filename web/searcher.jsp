@@ -22,15 +22,12 @@
         if (foundGemstone != null && !foundGemstone.isEmpty()) {
             for (Gemstone gemstone : foundGemstone) {
                 out.println(
-                        "<ul>\n" +
+                                "<ul>\n" +
                                 "<li> " + gemstone + " </li>\n" +
                                 "</ul>");
             }
-        }
+        } else out.println("<p>There are not matches!</p>");
     %>
-    <div class="w3-bar w3-padding-large w3-padding-24">
-        <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='/necklace'">Back</button>
-    </div>
 </div>
 </body>
 </html>

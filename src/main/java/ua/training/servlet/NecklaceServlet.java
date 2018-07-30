@@ -58,8 +58,12 @@ public class NecklaceServlet extends HttpServlet {
             necklaceService.addGemstoneToNecklace(gemstone);
         }
         if (req.getParameter("createNecklace") != null) {
-            List<Gemstone> userGemstone = necklaceService.createNecklace();
-            req.setAttribute("necklace", userGemstone);
+            try {
+                List<Gemstone> userGemstone = necklaceService.createNecklace();
+                req.setAttribute("necklace", userGemstone);
+            } catch (IllegalArgumentException e) {
+                req.setAttribute("message", e.getMessage());
+            }
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("necklace.jsp");
