@@ -56,6 +56,21 @@
         </button>
     </form>
 
+    <%
+        List<Gemstone> gemstones = (List<Gemstone>) request.getAttribute("necklace");
+        if (gemstones != null && !gemstones.isEmpty()) {
+            out.println("<div class=\"w3-card-4\">" +
+                    "<p>Your necklace consists of: </<p>" +
+                    "</div>");
+            for (Gemstone gemstone : gemstones) {
+                out.println(
+                        "<ul>\n" +
+                            "<li> "+gemstone+" </li>\n" +
+                        "</ul>");
+            }
+        }
+    %>
+
     <form action="${pageContext.request.contextPath}/costCalculator" method="get" class="w3-selection w3-light-grey w3-padding">
         <button type="submit" name="calculatePrice" class="w3-btn w3-green w3-round-large w3-margin-bottom">Calculate
             total price
@@ -75,21 +90,6 @@
     <form action="${pageContext.request.contextPath}/searcher" method="get" class="w3-selection w3-light-grey w3-padding">
         <button type="submit" name="search" class="w3-btn w3-green w3-round-large w3-margin-bottom">Search</button>
     </form>
-
-    <%
-        List<Gemstone> gemstones = (List<Gemstone>) request.getAttribute("necklace");
-        if (gemstones != null && !gemstones.isEmpty()) {
-            out.println("<div class=\"w3-card-4\">" +
-                            "<p>Your necklace consist of: </<p>" +
-                        "</div>");
-            for (Gemstone gemstone : gemstones) {
-                out.println(
-                        "<ul>\n" +
-                            "<li> "+gemstone+" </li>\n" +
-                        "</ul>");
-            }
-        }
-    %>
 </div>
 </body>
 </html>

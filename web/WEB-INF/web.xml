@@ -52,4 +52,5 @@
         <servlet-name>SearcherServlet</servlet-name>
         <url-pattern>/searcher</url-pattern>
     </servlet-mapping>
+
 </web-app>
