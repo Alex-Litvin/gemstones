@@ -56,21 +56,26 @@
         </button>
     </form>
 
-    <form action="${pageContext.request.contextPath}/costCalculator" method="get">
+    <form action="${pageContext.request.contextPath}/costCalculator" method="get" class="w3-selection w3-light-grey w3-padding">
         <button type="submit" name="calculatePrice" class="w3-btn w3-green w3-round-large w3-margin-bottom">Calculate
             total price
         </button>
     </form>
 
-    <form action="${pageContext.request.contextPath}/weightCalculator" method="get">
+    <form action="${pageContext.request.contextPath}/weightCalculator" method="get" class="w3-selection w3-light-grey w3-padding">
         <button type="submit" name="calculateWeight" class="w3-btn w3-green w3-round-large w3-margin-bottom">Calculate
             total weight
         </button>
     </form>
 
-    <form action="${pageContext.request.contextPath}/sorter" method="get">
+    <form action="${pageContext.request.contextPath}/sorter" method="get" class="w3-selection w3-light-grey w3-padding">
         <button type="submit" name="sort" class="w3-btn w3-green w3-round-large w3-margin-bottom">Sort by cost</button>
     </form>
+
+    <form action="${pageContext.request.contextPath}/searcher" method="get" class="w3-selection w3-light-grey w3-padding">
+        <button type="submit" name="search" class="w3-btn w3-green w3-round-large w3-margin-bottom">Search</button>
+    </form>
+
     <%
         List<Gemstone> gemstones = (List<Gemstone>) request.getAttribute("necklace");
         if (gemstones != null && !gemstones.isEmpty()) {

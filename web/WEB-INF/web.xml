@@ -43,4 +43,13 @@
         <servlet-name>SorterServlet</servlet-name>
         <url-pattern>/sorter</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearcherServlet</servlet-name>
+        <servlet-class>ua.training.servlet.SearcherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearcherServlet</servlet-name>
+        <url-pattern>/searcher</url-pattern>
+    </servlet-mapping>
 </web-app>

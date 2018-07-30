@@ -121,8 +121,8 @@ public class Main {
 
         Necklace necklace1 = new Necklace(gemstones);
 
-        List<Gemstone> gemstones1 = searcher.findGemstonesByTransparency(necklace1, TRANSPARENT, NON_TRANSPARENT);
-        gemstones1.stream().map(gemstone -> gemstone.toString()).forEach(System.out::println);
+//        List<Gemstone> gemstones1 = searcher.findGemstonesByTransparency(necklace1, TRANSPARENT, NON_TRANSPARENT);
+//        gemstones1.stream().map(gemstone -> gemstone.toString()).forEach(System.out::println);
     }
 
     public static void testCostAndWeightCalculatorServices() {

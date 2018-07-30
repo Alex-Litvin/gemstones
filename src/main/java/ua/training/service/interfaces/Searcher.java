@@ -7,5 +7,5 @@ import ua.training.model.Transparency;
 import java.util.List;
 
 public interface Searcher {
-    List<Gemstone> findGemstonesByTransparency(Necklace necklace, Transparency...transparencies);
+    List<Gemstone> findGemstonesByTransparency(Necklace necklace, List<Transparency> transparencies);
 }
