@@ -26,14 +26,14 @@ public class NecklaceServiceImpl implements NecklaceService {
     public List<Gemstone> createNecklace() {
         Necklace necklace = new Necklace(new ArrayList<>(userGemstones));
         necklace.setId(++necklaceId);
-        checkNecklace(necklace);
+        checkNecklace();
         dbNecklace.addNecklace(necklace);
         userGemstones.clear();
 
         return dbNecklace.getNecklaceById(necklaceId);
     }
 
-    private void checkNecklace(Necklace necklace) {
+    private void checkNecklace() {
         long necklaceCount = (long) dbNecklace.getNecklaces().size();
         if (necklaceCount > 1) {
             throw new IllegalArgumentException("You already create necklace!");
