@@ -26,4 +26,8 @@ public enum StoneName {
     public BigDecimal getCaratPrice() {
         return caratPrice;
     }
+
+    public String getTitle() {
+        return title;
+    }
 }
