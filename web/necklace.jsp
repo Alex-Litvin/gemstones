@@ -1,5 +1,4 @@
-<%@ page import="ua.training.model.Gemstone" %>
-<%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Necklace</title>
@@ -56,40 +55,52 @@
         </button>
     </form>
     <span style="color: red; ">${message}</span>
-    <%
-        List<Gemstone> gemstones = (List<Gemstone>) request.getAttribute("necklace");
-        if (gemstones != null && !gemstones.isEmpty()) {
-            out.println("<div class=\"w3-card-4\">" +
-                    "<p>Your necklace consists of: </<p>" +
-                    "</div>");
-            for (Gemstone gemstone : gemstones) {
-                out.println(
-                        "<ul>\n" +
-                            "<li> "+gemstone+" </li>\n" +
-                        "</ul>");
-            }
-        }
-    %>
+    <c:if test="${!empty necklace}">
+        <table class="w3-table w3-bordered w3-striped">
+            <tr class="w3-teal">
+                <th>Gemstone</th>
+                <th>Type</th>
+                <th>Carat</th>
+                <th>Carat/Price</th>
+                <th>Cost</th>
+                <th>Transparency</th>
+            </tr>
+            <c:forEach var="gemstone" items="${necklace}">
+                <jsp:useBean id="gemstone" class="ua.training.model.Gemstone"/>
+                <tr>
+                    <c:forEach var="map" items="${gemstone.nameTypeMap}">
+                        <td><c:out value="${map.key.title}"/></td>
+                        <td><c:out value="${map.value.name().toLowerCase()}"/></td>
+                    </c:forEach>
+                    <td><c:out value="${gemstone.carat}"/></td>
+                    <td><c:out value="${gemstone.caratPrice}"/></td>
+                    <td><c:out value="${gemstone.totalCost}"/></td>
+                    <td><c:out value="${gemstone.transparency.name().toLowerCase()}"/></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
+    <div class="w3-center">
+        <form action="${pageContext.request.contextPath}/costCalculator" method="get" class="w3-selection w3-light-grey w3-padding">
+            <button type="submit" name="calculatePrice" class="w3-btn w3-green w3-round-large w3-margin-bottom">Calculate
+                total price
+            </button>
+        </form>
 
-    <form action="${pageContext.request.contextPath}/costCalculator" method="get" class="w3-selection w3-light-grey w3-padding">
-        <button type="submit" name="calculatePrice" class="w3-btn w3-green w3-round-large w3-margin-bottom">Calculate
-            total price
-        </button>
-    </form>
+        <form action="${pageContext.request.contextPath}/weightCalculator" method="get" class="w3-selection w3-light-grey w3-padding">
+            <button type="submit" name="calculateWeight" class="w3-btn w3-green w3-round-large w3-margin-bottom">Calculate
+                total weight
+            </button>
+        </form>
 
-    <form action="${pageContext.request.contextPath}/weightCalculator" method="get" class="w3-selection w3-light-grey w3-padding">
-        <button type="submit" name="calculateWeight" class="w3-btn w3-green w3-round-large w3-margin-bottom">Calculate
-            total weight
-        </button>
-    </form>
+        <form action="${pageContext.request.contextPath}/sorter" method="get" class="w3-selection w3-light-grey w3-padding">
+            <button type="submit" name="sort" class="w3-btn w3-green w3-round-large w3-margin-bottom">Sort by cost</button>
+        </form>
 
-    <form action="${pageContext.request.contextPath}/sorter" method="get" class="w3-selection w3-light-grey w3-padding">
-        <button type="submit" name="sort" class="w3-btn w3-green w3-round-large w3-margin-bottom">Sort by cost</button>
-    </form>
-
-    <form action="${pageContext.request.contextPath}/searcher" method="get" class="w3-selection w3-light-grey w3-padding">
-        <button type="submit" name="search" class="w3-btn w3-green w3-round-large w3-margin-bottom">Search</button>
-    </form>
+        <form action="${pageContext.request.contextPath}/searcher" method="get" class="w3-selection w3-light-grey w3-padding">
+            <button type="submit" name="search" class="w3-btn w3-green w3-round-large w3-margin-bottom">Search</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
