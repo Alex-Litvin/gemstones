@@ -3,29 +3,33 @@ package ua.training.service;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import ua.training.model.*;
-import ua.training.service.interfaces.Searcher;
+import ua.training.model.Gemstone;
+import ua.training.model.GemstoneType;
+import ua.training.model.Necklace;
+import ua.training.model.StoneName;
+import ua.training.service.interfaces.Sorter;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static ua.training.model.GemstoneType.PRECIOUS;
 import static ua.training.model.GemstoneType.SEMIPRECIOUS;
 import static ua.training.model.StoneName.*;
 import static ua.training.model.Transparency.*;
 
-
-public class SearcherServiceTest {
-    private Searcher searcher;
+public class SorterServiceTest {
+    private Sorter sorter;
     private Necklace necklace;
     private Gemstone diamond;
     private Gemstone topaz;
     private Gemstone ruby;
 
-
     @Before
     public void setUp() {
-        searcher = new SearcherService();
+        sorter = new SorterService();
         necklace = new Necklace();
         Map<StoneName, GemstoneType> diamondMap = new HashMap<>();
         diamondMap.put(DIAMOND, PRECIOUS);
@@ -59,26 +63,11 @@ public class SearcherServiceTest {
     }
 
     @Test
-    public void whenSearchParameterIsTransparentThenResultIsTrue() {
-        List<Transparency> parameters = Collections.singletonList(TRANSPARENT);
-        List<Gemstone> searchResult = searcher.findGemstonesByTransparency(necklace, parameters);
+    public void whenSortedGemstonesEqualExpectedThenResultIsTrue() {
+        List<Gemstone> sortedGemstones = sorter.sortedGemstoneByCost(necklace);
+        List<Gemstone> expected = Arrays.asList(topaz, ruby, diamond);
 
-        Assert.assertEquals(searchResult, Collections.singletonList(diamond));
-    }
+        Assert.assertEquals(sortedGemstones, expected);
 
-    @Test
-    public void whenSearchParametersAreTransparentAndSemitransparentThenResultIsTrue() {
-        List<Transparency> parameters = Arrays.asList(TRANSPARENT, SEMITRANSPARENT);
-        List<Gemstone> searchResult = searcher.findGemstonesByTransparency(necklace, parameters);
-
-        Assert.assertEquals(searchResult, Arrays.asList(diamond, topaz));
-    }
-
-    @Test
-    public void whenSearchParametersAreTransparentSemitransparentNontransparentThenResultIsTrue() {
-        List<Transparency> parameters = Arrays.asList(TRANSPARENT, SEMITRANSPARENT, NON_TRANSPARENT);
-        List<Gemstone> searchResult = searcher.findGemstonesByTransparency(necklace, parameters);
-
-        Assert.assertEquals(searchResult, Arrays.asList(diamond, topaz, ruby));
     }
 }
