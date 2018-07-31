@@ -5,9 +5,8 @@ import ua.training.model.Necklace;
 import ua.training.service.interfaces.CostCalculator;
 
 import java.math.BigDecimal;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CostCalculatorService implements CostCalculator {
 
@@ -24,9 +23,8 @@ public class CostCalculatorService implements CostCalculator {
     }
 
     @Override
-    public Map<Gemstone, BigDecimal> getGemstonePriceMap(Necklace necklace) {
-        return necklace.getGemstones().stream()
-                .collect(Collectors.toMap(Function.identity(), Gemstone::getTotalCost));
+    public List<Gemstone> getGemstoneList(Necklace necklace) {
+        return new ArrayList<>(necklace.getGemstones());
 
     }
 }

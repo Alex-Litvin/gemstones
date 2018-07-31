@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.List;
 
 public class CostCalculatorServlet extends HttpServlet {
     private CostCalculator costCalculator;
@@ -25,10 +25,10 @@ public class CostCalculatorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("calculatePrice") != null) {
-            Map<Gemstone, BigDecimal> gemstonePriceMap = costCalculator.getGemstonePriceMap(DBNecklaceMock.getDbNecklace().getNecklaces().get(0));
+            List<Gemstone> gemstoneList = costCalculator.getGemstoneList(DBNecklaceMock.getDbNecklace().getNecklaces().get(0));
             BigDecimal totalCost = costCalculator.calcCostNecklace(DBNecklaceMock.getDbNecklace().getNecklaces().get(0));
 
-            req.setAttribute("gemstonePriceMap", gemstonePriceMap);
+            req.setAttribute("gemstoneList", gemstoneList);
             req.setAttribute("totalCost", totalCost);
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("costCalculator.jsp");
