@@ -1,5 +1,4 @@
-<%@ page import="ua.training.model.Gemstone" %>
-<%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,17 +10,30 @@
     <h1>Gemstones have been sorted by cost:</h1>
 </div>
 <div class="w3-card-4">
-    <%
-        List<Gemstone> sortedGemstone = (List<Gemstone>) request.getAttribute("sortedGemstone");
-        if (sortedGemstone != null && !sortedGemstone.isEmpty()) {
-            for (Gemstone gemstone : sortedGemstone) {
-                out.println(
-                        "<ul>\n" +
-                            "<li> " + gemstone + " </li>\n" +
-                        "</ul>");
-            }
-        }
-    %>
+    <table class="w3-table w3-bordered w3-striped">
+        <tr class="w3-teal">
+            <th>Gemstone</th>
+            <th>Type</th>
+            <th>Carat</th>
+            <th>Carat/Price</th>
+            <th>Cost</th>
+            <th>Transparency</th>
+        </tr>
+        <c:forEach var="gemstone" items="${sortedGemstone}">
+            <jsp:useBean id="gemstone" class="ua.training.model.Gemstone"/>
+            <tr>
+                <c:forEach var="map" items="${gemstone.nameTypeMap}">
+                    <td><c:out value="${map.key.title}"/></td>
+                    <td><c:out value="${map.value.name().toLowerCase()}"/></td>
+                </c:forEach>
+                <td><c:out value="${gemstone.carat}"/></td>
+                <td><c:out value="${gemstone.caratPrice}"/></td>
+                <td><c:out value="${gemstone.totalCost}"/></td>
+                <td><c:out value="${gemstone.transparency.name().toLowerCase()}"/></td>
+            </tr>
+        </c:forEach>
+    </table>
+
     <div class="w3-bar w3-padding-large w3-padding-24">
         <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='/necklace'">Back</button>
     </div>
