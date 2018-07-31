@@ -1,4 +1,4 @@
-<%@ page import="java.math.BigDecimal" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,12 +10,33 @@
     <h1>Total weight of your necklace is:</h1>
 </div>
 <div class="w3-card-4">
-    <%
-        BigDecimal totalWeight = (BigDecimal) request.getAttribute("totalWeight");
-        if (totalWeight!= null) {
-            out.println("<h1>" + totalWeight + "</h1>");
-        }
-    %>
+    <table class="w3-table w3-bordered w3-striped">
+        <tr class="w3-teal">
+            <th>Gemstone</th>
+            <th>Type</th>
+            <th>Carat</th>
+            <th>Carat/Price</th>
+            <th>Cost</th>
+            <th>Transparency</th>
+        </tr>
+        <c:forEach var="gemstone" items="${gemstoneList}">
+            <jsp:useBean id="gemstone" class="ua.training.model.Gemstone"/>
+            <tr>
+                <c:forEach var="map" items="${gemstone.nameTypeMap}">
+                    <td><c:out value="${map.key.title}"/></td>
+                    <td><c:out value="${map.value.name().toLowerCase()}"/></td>
+                </c:forEach>
+                <td><c:out value="${gemstone.carat}"/></td>
+                <td><c:out value="${gemstone.caratPrice}"/></td>
+                <td><c:out value="${gemstone.totalCost}"/></td>
+                <td><c:out value="${gemstone.transparency.name().toLowerCase()}"/></td>
+            </tr>
+        </c:forEach>
+    </table>
+
+    <div class="w3-bar w3-padding-large w3-padding-24">
+        <p>Total weight: <c:out value= "${totalWeight}" /></p>
+    </div>
     <div class="w3-bar w3-padding-large w3-padding-24">
         <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='/necklace'">Back</button>
     </div>
