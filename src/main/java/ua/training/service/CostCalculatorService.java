@@ -5,7 +5,6 @@ import ua.training.model.Necklace;
 import ua.training.service.interfaces.CostCalculator;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -21,7 +20,7 @@ public class CostCalculatorService implements CostCalculator {
 
     @Override
     public BigDecimal calcCostOneGemstone(BigDecimal carat, BigDecimal price, BigDecimal costFactor) {
-        return carat.multiply(price).multiply(costFactor, new MathContext(2));
+        return carat.multiply(price).multiply(costFactor);
     }
 
     @Override
