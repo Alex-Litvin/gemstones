@@ -26,17 +26,20 @@ public class NecklaceServiceImpl implements NecklaceService {
     public List<Gemstone> createNecklace() {
         Necklace necklace = new Necklace(new ArrayList<>(userGemstones));
         necklace.setId(++necklaceId);
-        checkNecklace();
+        checkNecklace(necklace);
         dbNecklace.addNecklace(necklace);
         userGemstones.clear();
 
         return dbNecklace.getNecklaceById(necklaceId);
     }
 
-    private void checkNecklace() {
+    private void checkNecklace(Necklace necklace) {
         long necklaceCount = (long) dbNecklace.getNecklaces().size();
         if (necklaceCount > 1) {
             throw new IllegalArgumentException("You already create necklace!");
+        }
+        if (necklace.getGemstones().isEmpty()) {
+            throw new IllegalArgumentException("Necklace must consist of at least one gemstone!");
         }
     }
 }
