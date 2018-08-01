@@ -35,7 +35,7 @@ public class NecklaceServiceImpl implements NecklaceService {
 
     private void checkNecklace(Necklace necklace) {
         long necklaceCount = (long) dbNecklace.getNecklaces().size();
-        if (necklaceCount > 1) {
+        if (necklaceCount == 1) {
             throw new IllegalArgumentException("You already create necklace!");
         }
         if (necklace.getGemstones().isEmpty()) {
