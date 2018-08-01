@@ -62,8 +62,9 @@
                 <th>Type</th>
                 <th>Carat</th>
                 <th>Carat/Price</th>
-                <th>Cost</th>
                 <th>Transparency</th>
+                <th>Cost factor</th>
+                <th>Cost</th>
             </tr>
             <c:forEach var="gemstone" items="${necklace}">
                 <jsp:useBean id="gemstone" class="ua.training.model.Gemstone"/>
@@ -74,8 +75,9 @@
                     </c:forEach>
                     <td><c:out value="${gemstone.carat}"/></td>
                     <td><c:out value="${gemstone.caratPrice}"/></td>
-                    <td><c:out value="${gemstone.totalCost}"/></td>
                     <td><c:out value="${gemstone.transparency.name().toLowerCase()}"/></td>
+                    <td><c:out value="${gemstone.transparency.costFactor}"/></td>
+                    <td><c:out value="${gemstone.totalCost}"/></td>
                 </tr>
             </c:forEach>
         </table>
@@ -86,17 +88,14 @@
                 total price
             </button>
         </form>
-
         <form action="${pageContext.request.contextPath}/weightCalculator" method="get" class="w3-selection w3-light-grey w3-padding">
             <button type="submit" name="calculateWeight" class="w3-btn w3-green w3-round-large w3-margin-bottom">Calculate
                 total weight
             </button>
         </form>
-
         <form action="${pageContext.request.contextPath}/sorter" method="get" class="w3-selection w3-light-grey w3-padding">
             <button type="submit" name="sort" class="w3-btn w3-green w3-round-large w3-margin-bottom">Sort by cost</button>
         </form>
-
         <form action="${pageContext.request.contextPath}/searcher" method="get" class="w3-selection w3-light-grey w3-padding">
             <button type="submit" name="search" class="w3-btn w3-green w3-round-large w3-margin-bottom">Search</button>
         </form>

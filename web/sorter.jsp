@@ -16,8 +16,9 @@
             <th>Type</th>
             <th>Carat</th>
             <th>Carat/Price</th>
-            <th>Cost</th>
             <th>Transparency</th>
+            <th>Cost factor</th>
+            <th>Cost</th>
         </tr>
         <c:forEach var="gemstone" items="${sortedGemstone}">
             <jsp:useBean id="gemstone" class="ua.training.model.Gemstone"/>
@@ -28,12 +29,12 @@
                 </c:forEach>
                 <td><c:out value="${gemstone.carat}"/></td>
                 <td><c:out value="${gemstone.caratPrice}"/></td>
-                <td><c:out value="${gemstone.totalCost}"/></td>
                 <td><c:out value="${gemstone.transparency.name().toLowerCase()}"/></td>
+                <td><c:out value="${gemstone.transparency.costFactor}"/></td>
+                <td><c:out value="${gemstone.totalCost}"/></td>
             </tr>
         </c:forEach>
     </table>
-
     <div class="w3-bar w3-padding-large w3-padding-24">
         <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='/necklace'">Back</button>
     </div>

@@ -14,12 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+
+import static ua.training.model.Transparency.*;
 
 public class SearcherServlet extends HttpServlet {
     private Searcher searcher;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         searcher = new SearcherService();
     }
 
@@ -29,21 +32,18 @@ public class SearcherServlet extends HttpServlet {
         String semitransparent = req.getParameter("semitransparent");
         String nontransparent = req.getParameter("non_transparent");
 
-        List<Transparency> transparencies = new ArrayList<>();
+        List<Predicate<Transparency>> predicates = new ArrayList<>();
         if (transparent != null) {
-            Transparency first = Transparency.valueOf(transparent.toUpperCase());
-            transparencies.add(first);
+            predicates.add(f -> f.equals(TRANSPARENT));
         }
         if (semitransparent != null) {
-            Transparency second = Transparency.valueOf(semitransparent.toUpperCase());
-            transparencies.add(second);
+            predicates.add(s -> s.equals(SEMITRANSPARENT));
         }
         if (nontransparent != null) {
-            Transparency third = Transparency.valueOf(nontransparent.toUpperCase());
-            transparencies.add(third);
+            predicates.add(t -> t.equals(NON_TRANSPARENT));
         }
 
-        List<Gemstone> foundGemstone = searcher.findGemstonesByTransparency(DBNecklaceMock.getDbNecklace().getNecklaces().get(0), transparencies);
+        List<Gemstone> foundGemstone = searcher.findGemstonesByTransparency(DBNecklaceMock.getDbNecklace().getNecklaces().get(0), predicates);
         req.setAttribute("foundGemstone", foundGemstone);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("searcher.jsp");

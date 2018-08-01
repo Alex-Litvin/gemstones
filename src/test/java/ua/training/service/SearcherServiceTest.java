@@ -8,6 +8,7 @@ import ua.training.service.interfaces.Searcher;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Predicate;
 
 import static ua.training.model.GemstoneType.PRECIOUS;
 import static ua.training.model.GemstoneType.SEMIPRECIOUS;
@@ -60,7 +61,7 @@ public class SearcherServiceTest {
 
     @Test
     public void whenSearchParameterIsTransparentThenResultIsTrue() {
-        List<Transparency> parameters = Collections.singletonList(TRANSPARENT);
+        List<Predicate<Transparency>> parameters = Collections.singletonList(g -> g.equals(TRANSPARENT));
         List<Gemstone> searchResult = searcher.findGemstonesByTransparency(necklace, parameters);
 
         Assert.assertEquals(searchResult, Collections.singletonList(diamond));
@@ -68,7 +69,9 @@ public class SearcherServiceTest {
 
     @Test
     public void whenSearchParametersAreTransparentAndSemitransparentThenResultIsTrue() {
-        List<Transparency> parameters = Arrays.asList(TRANSPARENT, SEMITRANSPARENT);
+        List<Predicate<Transparency>> parameters = Arrays.asList(
+                g -> g.equals(TRANSPARENT),
+                g -> g.equals(SEMITRANSPARENT));
         List<Gemstone> searchResult = searcher.findGemstonesByTransparency(necklace, parameters);
 
         Assert.assertEquals(searchResult, Arrays.asList(diamond, topaz));
@@ -76,7 +79,10 @@ public class SearcherServiceTest {
 
     @Test
     public void whenSearchParametersAreTransparentSemitransparentNontransparentThenResultIsTrue() {
-        List<Transparency> parameters = Arrays.asList(TRANSPARENT, SEMITRANSPARENT, NON_TRANSPARENT);
+        List<Predicate<Transparency>> parameters = Arrays.asList(
+                g -> g.equals(TRANSPARENT),
+                g -> g.equals(SEMITRANSPARENT),
+                g -> g.equals(NON_TRANSPARENT));
         List<Gemstone> searchResult = searcher.findGemstonesByTransparency(necklace, parameters);
 
         Assert.assertEquals(searchResult, Arrays.asList(diamond, topaz, ruby));
